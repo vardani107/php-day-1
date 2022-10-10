@@ -7,6 +7,7 @@
         <div class="col-lg-12">
             <div class="card shadow mb-4">
                 <div class="card-body">
+
                     @if (count($errors)>0)
                     <div class="alert alert-danger">
                         <ul>
@@ -16,6 +17,7 @@
                         </ul>
                     </div> 
                     @endif
+                    
                 <div class="card-body">
                     <form method="post" enctype="multipart/form-data" action="{{route('master_siswa.store')}}">
                         @csrf

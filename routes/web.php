@@ -7,7 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ContactController;
-
+use App\Http\Controllers\Logincontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,12 +69,15 @@ use App\Http\Controllers\ContactController;
 // });
 
 // Route::get('/dashboard', 'DashboardController@index');
-Route::resource('dashboard', DashboardController::class);
+Route::resource('dashboard', DashboardController::class)->middleware('auth');
+Route::resource('master_siswa', SiswaController::class)->middleware('auth') ;
+Route::resource('master_project', ProjectController::class)->middleware('auth');
+
 Route::get('master_siswa/{id_siswa}/hapus', [SiswaController::class, 'hapus'])->name('master_siswa.hapus');
-Route::resource('master_siswa', SiswaController::class);
 Route::get('master_project/create/{id_siswa}', [ProjectController::class, 'tambah']) -> name ('master_project.tambah');
-Route::resource('master_project', ProjectController::class);
-Route::resource('master_contact', ContactController::class);
 route::get('master_project/{id_siswa}/hapus', [ProjectController::class, 'hapus']) -> name ('master_project.hapus');
 
+Route::get('login', [Logincontroller::class, 'index'])->name('login')->middleware('guest');
+Route::post('login', [Logincontroller::class, 'authenticate']);
 
+Route::post('logout', [Logincontroller::class, 'logout']);  
