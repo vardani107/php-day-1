@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class SiswaController extends Controller
 {
+//     public function __construct(){
+//         $this->middleware(['auth','admin']);
+//         $this->middleware(['auth', 'walas'])->only(['index','show']);
+//         $this->middleware(['auth','siswa']);
+//     }
+    
     /**
      * Display a listing of the resource.
      *
@@ -197,4 +203,5 @@ class SiswaController extends Controller
         Session::flash('danger', 'data berhasil dihapus !!!');
         return redirect('master_siswa');
     }
+
 }

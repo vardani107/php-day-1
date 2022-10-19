@@ -20,26 +20,7 @@ use App\Http\Controllers\Logincontroller;
 |
 */
 
-// Route::get('/home', function () {
-//     return view('home');
-// });
-
-// Route ::get('/admin', function(){
-//     return view('master.admin');
-// });
-
-// Route::get('/about', function () {
-//     return view('aboutme');
-// });
-
-// Route::get('/contact', function () {
-//     return view('contact');
-// });
-
-// Route::get('/project', function () {
-//     return view('project');
-// });
-
+// 
 // Route::get('/master_siswa' , function(){
 //     return view('mastersiswa');
 // });
@@ -69,15 +50,50 @@ use App\Http\Controllers\Logincontroller;
 // });
 
 // Route::get('/dashboard', 'DashboardController@index');
-Route::resource('dashboard', DashboardController::class)->middleware('auth');
-Route::resource('master_siswa', SiswaController::class)->middleware('auth') ;
-Route::resource('master_project', ProjectController::class)->middleware('auth');
 
-Route::get('master_siswa/{id_siswa}/hapus', [SiswaController::class, 'hapus'])->name('master_siswa.hapus');
-Route::get('master_project/create/{id_siswa}', [ProjectController::class, 'tambah']) -> name ('master_project.tambah');
-route::get('master_project/{id_siswa}/hapus', [ProjectController::class, 'hapus']) -> name ('master_project.hapus');
 
-Route::get('login', [Logincontroller::class, 'index'])->name('login')->middleware('guest');
-Route::post('login', [Logincontroller::class, 'authenticate']);
+// 
+// route::middleware('guest')->group(function () {
+    Route::get('login', [Logincontroller::class, 'index'])->name('login')->middleware('guest');
+    Route::post('login', [Logincontroller::class, 'authenticate']);
 
-Route::post('logout', [Logincontroller::class, 'logout']);  
+    Route::get('/home', function () {
+
+        return view('home');
+    });
+
+    Route::get('/admin', function () {
+        return view('master.admin');
+    });
+
+    Route::get('/about', function () {
+        return view('aboutme');
+    });
+
+    Route::get('/contact', function () {
+        return view('contact');
+    });
+
+    Route::get('/project', function () {
+        return view('project');
+    });
+
+    route::get('/master_contact', function () {
+        return view('master_contact');
+    });
+// });
+
+
+// 
+// route::middleware(['auth' , 'siswa'])->group(function () {
+    Route::resource('dashboard', DashboardController::class);
+    Route::resource('master_siswa', SiswaController::class);
+    Route::resource('master_project', ProjectController::class);
+    // route::resource('master_contact' )
+
+    Route::get('master_siswa/{id_siswa}/hapus', [SiswaController::class, 'hapus'])->name('master_siswa.hapus');
+    Route::get('master_project/create/{id_siswa}', [ProjectController::class, 'tambah'])->name('master_project.tambah');
+    route::get('master_project/{id_siswa}/hapus', [ProjectController::class, 'hapus'])->name('master_project.hapus');
+
+    Route::post('logout', [Logincontroller::class, 'logout']);
+// });

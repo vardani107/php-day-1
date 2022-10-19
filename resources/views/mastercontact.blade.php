@@ -1,4 +1,3 @@
-{{-- @section('master.title', 'Master Siswa' ) --}}
 @extends('master.admin')
 @section('title', 'Master contact')
 @section('content-title','Master contact')

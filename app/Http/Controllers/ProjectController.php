@@ -60,7 +60,7 @@ class ProjectController extends Controller
         ],);
 
         project::create($validateproject);
-        Session::flash('Berhasil', 'data anda tersimpan !!!');
+        Session::flash('tambah', 'data anda tersimpan !!!');
         return redirect('/master_project');
     }
 
@@ -120,7 +120,7 @@ class ProjectController extends Controller
         $project->tanggal = $request->tanggal;
         $project->save();
         
-        Session::flash('Berhasil', 'data berhasil di edit !!!');
+        Session::flash('update', 'data berhasil di edit !!!');
         return redirect('/master_project');
 
     }
@@ -138,7 +138,7 @@ class ProjectController extends Controller
 
     public function hapus($id){
         $project = project::find($id)->delete();
-        session::flash('success', 'data berhasil di hapus');
+        session::flash('hapus', 'data berhasil di hapus');
         return redirect('/master_project');
     }
 }
