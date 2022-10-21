@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\jenis_kontak;
+use App\Models\kontak;
+use App\Models\siswa;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
 class ContactController extends Controller
 {
     /**
@@ -13,8 +16,12 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
-        return view('mastercontact');
+        $data = jenis_kontak::all();
+        return view ('mastercontact' , compact('data'));
+
+        // $data = siswa::paginate(7);
+        // $jenis_kontak = jenis_kontak::paginate(7);
+        // return view('mastercontact', compact('data' , 'jenis_kontak'));
     }
 
     /**
@@ -24,10 +31,16 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
-        return view('view_c.c_contact');
+        
     }
 
+
+    public function tambah($id)
+    {
+        $siswa = siswa::find($id);
+        $jenis_kontak = jenis_kontak::all();
+        return view('view_c.c_contact   ', compact('siswa', 'jenis_kontak'));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -36,7 +49,24 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = [
+            'required' => ':attribute harus diisi gaess',
+            'min' => ':attribute minimal :min karakter ya coy',
+            'max' => 'attribute makasimal :max karakter gaess',
+            'numeric' => ':attribute kudu diisi angka cak!!',
+            'mimes' => 'file :attribute harus bertipe :mimes'
+        ];
+        $validateData = $request->validate([
+            
+        ], $message);
+
+        kontak::create([
+            'siswa_id' => $request->sosmed,
+            'jenis_kontak_id' => $request->jenis_kontak,
+            'deskripsi' => $request->deskripsi,
+        ]);
+        Session::flash('benar', 'Selamat!!! Project Anda Berhasil Ditambahkan');
+        return redirect('/mastercontact');
     }
 
     /**
@@ -47,7 +77,8 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        //
+        $kontak = siswa::find($id)->kontak()->get();
+        return view('view_c.s_contact', compact('kontak'));
     }
 
     /**
@@ -58,8 +89,7 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        //
-        return view('view_c.e_contact');
+        return view('EditContact');
     }
 
     /**
@@ -83,5 +113,12 @@ class ContactController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function hapus($id)
+    {
+        $kontak = kontak::find($id)->delete();
+        Session::flash('danger', 'Data Berhasil Dihapus');
+        return redirect('/mastercontact');
     }
 }

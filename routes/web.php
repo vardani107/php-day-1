@@ -8,6 +8,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Logincontroller;
+use App\Http\Controllers\JContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,15 +86,21 @@ use App\Http\Controllers\Logincontroller;
 
 
 // 
-// route::middleware(['auth' , 'siswa'])->group(function () {
+// route::middleware(['auth', 'siswa'])->group(function () {
     Route::resource('dashboard', DashboardController::class);
     Route::resource('master_siswa', SiswaController::class);
     Route::resource('master_project', ProjectController::class);
+    Route::resource('master_contact', ContactController::class);
+    Route::resource('jenis_kontak', JContactController::class);
     // route::resource('master_contact' )
 
     Route::get('master_siswa/{id_siswa}/hapus', [SiswaController::class, 'hapus'])->name('master_siswa.hapus');
+    
     Route::get('master_project/create/{id_siswa}', [ProjectController::class, 'tambah'])->name('master_project.tambah');
-    route::get('master_project/{id_siswa}/hapus', [ProjectController::class, 'hapus'])->name('master_project.hapus');
+    Route::get('master_project/{id_siswa}/hapus', [ProjectController::class, 'hapus'])->name('master_project.hapus');
+    // // Route::get('jenis_kontak/{id_siswa}/hapus', [JContactController::class, 'hapus'])->name('Jcontact.hapus');
+    // Route::get('jenis_kontak/hapus', [JContactController::class, 'hapus'])->name('jenis_kontak.hapus');
+    // // Route::get('jenis_kontak/create/{id_siswa}', [JContactController::class, 'tambah'])->name('jenis_kontak.tambah');
 
     Route::post('logout', [Logincontroller::class, 'logout']);
 // });

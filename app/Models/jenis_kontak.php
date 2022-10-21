@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Models;
+    namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Model;
 
-class jenis_kontak extends Model
-{
-    use HasFactory;
-    protected $fillable = [
-        'deskripsi'
-    ];
+    class jenis_kontak extends Model
+    {
+        use HasFactory;
+        protected $fillable = [
+            'jenis_kontak'
+        ];
 
-    protected $table = "jenis_kontak";
+        protected $table = "jenis_kontak";
 
-    public function siswa (){
-        return $this->belongsToMany("App\Models\Siswa");
+        public function kontak()
+        {
+            return $this->belongsToMany('App\Models\Siswa', 'id');
+        }
     }
-}

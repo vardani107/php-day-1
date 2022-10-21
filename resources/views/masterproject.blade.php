@@ -14,8 +14,8 @@
 
     {{-- message jika salah --}}
     @if ($message = Session::get('hapus'))
-        <div  class="alert alert-danger alert-block">
-             <button type="button" class="close" data-dismiss="alert"></button>
+        <div class="alert alert-danger alert-block">
+            <button type="button" class="close" data-dismiss="alert"></button>
             <strong>{{ $message }}</strong>
         </div>
     @endif
@@ -76,6 +76,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <script>

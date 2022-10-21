@@ -16,7 +16,8 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        $jumlah1 = Siswa::all()->count();
+        $jumlah1
+         = siswa::all()->count();
         // return($jumlah1);
         $jumlah2 = project::all()->count();
         // return($jumlah2);
