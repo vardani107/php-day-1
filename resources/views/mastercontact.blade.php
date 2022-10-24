@@ -31,7 +31,7 @@
                                             <input type="text" class="form-control" id="nama" name='nama'>
                                         </div>
                                         <div class="modal-footer">
-                                            <a href="{{ route('jenis_kontak.index') }}" class="btn btn-danger">Batal</a>
+                                            <a href="{{ route('master_contact.index') }}" class="btn btn-danger">Batal</a>
                                             <input type="submit" class="btn btn-success" value="Simpan">
                                         </div>
                                     </form>
@@ -40,11 +40,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            {{-- </div> --}}
+        {{-- </div> --}}
         {{-- <div class="card-header py-3 bg-danger">
-                     <a href="{{ route('jenis_kontak.create') }}" class="btn btn-success ">Tambah Kontak</a>
-                </div> --}}
+                        <a href="{{ route('jenis_kontak.create') }}" class="btn btn-success ">Tambah Kontak</a>
+                    </div> --}}
         <div class="card-body">
             <table class="table">
                 <thead>

@@ -16,12 +16,12 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $data = jenis_kontak::all();
-        return view ('mastercontact' , compact('data'));
+        // $data = jenis_kontak::all();
+        // return view ('mastercontact' , compact('data'));
 
-        // $data = siswa::paginate(7);
-        // $jenis_kontak = jenis_kontak::paginate(7);
-        // return view('mastercontact', compact('data' , 'jenis_kontak'));
+        $data = siswa::paginate(5);
+        $jenis_kontak = jenis_kontak::paginate(5);
+        return view('mastercontact', compact('data' , 'jenis_kontak'));
     }
 
     /**
@@ -56,15 +56,17 @@ class ContactController extends Controller
             'numeric' => ':attribute kudu diisi angka cak!!',
             'mimes' => 'file :attribute harus bertipe :mimes'
         ];
-        $validateData = $request->validate([
-            
+        
+        $this->validate($request, [
+
         ], $message);
 
         kontak::create([
-            'siswa_id' => $request->sosmed,
+            'siswa_id' => $request->siswa_id,
             'jenis_kontak_id' => $request->jenis_kontak,
             'deskripsi' => $request->deskripsi,
         ]);
+
         Session::flash('benar', 'Selamat!!! Project Anda Berhasil Ditambahkan');
         return redirect('/mastercontact');
     }
@@ -89,7 +91,9 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        return view('EditContact');
+        $kontak = kontak::find($id);
+        $siswa = siswa::find($id);
+        return view('EditContact', compact('kontak', 'siswa'));
     }
 
     /**
@@ -102,6 +106,24 @@ class ContactController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $msg = [
+            'required' => ':attribute harus diisi',
+            'min' => ':attribute minimal :min karakter',
+            'max' => ':attribute maximal :max karakter'
+        ];
+
+        $this->validate($request,[
+
+        ],$msg);
+
+        $kontak = kontak::find($id);
+        $kontak->jenis_kontak_id = $request->jenis_kontak;
+        $kontak->deskripsi = $request->deskripsi;
+
+        $kontak->save();
+        Session::flash('u_kontak', 'kontak berhasil di update');
+        return redirect('mastercontact');
+            
     }
 
     /**

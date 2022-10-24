@@ -35,7 +35,7 @@
 
                 <div class="form-group">
                     <input type="submit" class="btn btn-success" value="simpan">
-                    <a href="{{ route('jenis_kontak.index') }}" class="btn btn-danger">Batal</a>
+                    <a href="{{ route('master_contact.index') }}" class="btn btn-danger">Batal</a>
                 </div>
             </form>
         </div>
