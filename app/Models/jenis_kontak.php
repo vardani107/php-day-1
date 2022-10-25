@@ -16,6 +16,6 @@
 
         public function kontak()
         {
-            return $this->belongsToMany('App\Models\Siswa', 'id');
+            return $this->belongsToMany('App\Models\kontak', 'id');
         }
     }

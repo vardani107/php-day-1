@@ -17,8 +17,8 @@ class JContactController extends Controller
     public function index()
     {
         //
-        $jkontak = jenis_kontak::paginate(5);
-        return view ( 'master_contact', compact('jkontak'));
+        // $jkontak = jenis_kontak::paginate(5);
+        // return view ( 'master_contact', compact('jkontak'));
     }   
 
     /**
@@ -52,10 +52,7 @@ class JContactController extends Controller
         ];
 
         $this -> validate($request, [
-            'id_siswa' => 'required',
-            'nama_project' => 'required|max:20|min:1',
-            'deskripsi' => 'required',
-            'tanggal' => 'required'
+            'jenis_kontak' => 'required'
         ], $msg);
 
         Session::flash('jkontak_store', 'Jenis Kontak tersimpan !!!');
