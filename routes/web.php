@@ -59,7 +59,6 @@ use App\Http\Controllers\JContactController;
     Route::post('login', [Logincontroller::class, 'authenticate']);
 
     Route::get('/', function () {
-
         return view('home');
     });
 
