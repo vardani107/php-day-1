@@ -54,7 +54,7 @@ use App\Http\Controllers\JContactController;
 
 
 // 
-// route::middleware('guest')->group(function () {
+route::middleware('guest')->group(function () {
     Route::get('login', [Logincontroller::class, 'index'])->name('login')->middleware('guest');
     Route::post('login', [Logincontroller::class, 'authenticate']);
 
@@ -81,11 +81,11 @@ use App\Http\Controllers\JContactController;
     route::get('/master_contact', function () {
         return view('master_contact');
     });
-// });
+});
 
 
 // 
-// route::middleware(['auth', 'siswa'])->group(function () {
+route::middleware(['auth', 'siswa'])->group(function () {
     Route::resource('dashboard', DashboardController::class);
     Route::resource('master_siswa', SiswaController::class);
     Route::resource('master_project', ProjectController::class);
@@ -102,4 +102,4 @@ use App\Http\Controllers\JContactController;
     // // Route::get('jenis_kontak/create/{id_siswa}', [JContactController::class, 'tambah'])->name('jenis_kontak.tambah');
 
     Route::post('logout', [Logincontroller::class, 'logout']);
-// });
+});
