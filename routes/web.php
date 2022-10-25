@@ -58,7 +58,7 @@ use App\Http\Controllers\JContactController;
     Route::get('login', [Logincontroller::class, 'index'])->name('login')->middleware('guest');
     Route::post('login', [Logincontroller::class, 'authenticate']);
 
-    Route::get('/home', function () {
+    Route::get('/', function () {
 
         return view('home');
     });
